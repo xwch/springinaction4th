@@ -51,7 +51,9 @@ public class SpittleController {
     public List<Spittle> spittles(
       @RequestParam(value = "max",defaultValue = MAX_LONG_AS_STRING) long max,
       @RequestParam(value = "count",defaultValue = "20") int count){
-        return spittleRepository.findSpittles(max, count);
+        List<Spittle> list = spittleRepository.findSpittles(max, count);
+        System.out.println("list--->"+list);
+        return list;
     }
 
     @RequestMapping(value = "/{spittleId}",method = RequestMethod.GET)
@@ -61,14 +63,14 @@ public class SpittleController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String saveSpittle(SpittleFormDTO form){
+    public String saveSpittle(SpittleFormDTO form,Model model){
         Spittle spittle = new Spittle();
         spittle.setTime(new Date());
         spittle.setMessage(form.getMessage());
         spittle.setLatitude(form.getLatitude());
         spittle.setLongitude(form.getLongitude());
         spittleRepository.save(spittle);
-
+        System.out.println("save success-->"+spittle.toString());
         return "redirect:/spittles";
     }
 
