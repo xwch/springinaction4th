@@ -1,10 +1,10 @@
-#《Spring in Action》4th 学习笔记
+# 《Spring in Action》4th 学习笔记
 
-##问题
+## 问题
 1. spittles.jsp的渲染有问题，没办法显示Recent Spittles
 原因找到了，是因为我保留了web.xml文件，并且里面的文件头是http://java.sun.com/dtd/web-app_2_3.dtd.
-方案1：把web.xml删了，因为这里使用了javaConfig代替web.xml
-方案2：把web.xml的内容改为：
+**方案1：**把web.xml删了，因为这里使用了javaConfig代替web.xml
+**方案2：**把web.xml的内容改为：
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 
