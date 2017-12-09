@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!--定义header模版-->
+<div th:fragment="header">
+    <a th:href="@{/}">
+        <img th:src="@{/static/image/spitter_logo_50.png}" border="0" />
+    </a>
+</div>
+
+<div></div>
+
+<!--定义copyright模版-->
+<div th:fragment="copyright">
+    Copyright &copy; xie weichang
+</div>
+</body>
+</html>

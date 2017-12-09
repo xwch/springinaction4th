@@ -28,7 +28,7 @@ public class SpitterController {
 
     /**
      * 跳转到注册页面
-     * 由于跳转的registerForm.jsp页面使用了模型绑定，所以模型中需要有一个key=spitter的对象
+     * 由于跳转的registerForm页面使用了模型绑定，所以模型中需要有一个key=spitter的对象
      * @return
      */
     @RequestMapping(value = "/register",method = RequestMethod.GET)

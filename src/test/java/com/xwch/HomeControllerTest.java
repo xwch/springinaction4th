@@ -4,11 +4,13 @@ import com.xwch.bean.Spittle;
 import com.xwch.web.controller.HomeController;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.ui.Model;
 
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -24,7 +26,8 @@ public class HomeControllerTest {
     @Test
     public void testHello(){
         HomeController homeController = new HomeController();
-        assertEquals("home",homeController.home());
+        Model model = mock(Model.class);
+        assertEquals("home",homeController.home(model));
     }
 
     /**

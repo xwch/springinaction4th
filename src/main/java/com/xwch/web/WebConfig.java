@@ -10,9 +10,12 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
+import org.thymeleaf.util.TemplateModeUtils;
 
 /**
  * web上下文配置，包含视图解析，控制器，静态资源处理等
@@ -23,17 +26,33 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @ComponentScan("com.xwch.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    /**
-     * JSP视图解析器
-     * @return
-     */
     @Bean
-    public ViewResolver viewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/"); //前缀
-        resolver.setSuffix(".jsp"); //后缀
-        return resolver;
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine);
+        viewResolver.setCharacterEncoding("utf-8");
+        return viewResolver;
     }
+
+    @Bean
+    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver){
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        return templateEngine;
+    }
+
+    @Bean
+    public TemplateResolver templateResolver(){
+        TemplateResolver templateResolver =
+                new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
+        //渲染为HTML5
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
+    }
+
+
 
     /**
      * 静态资源处理
